@@ -10,13 +10,17 @@
 		<security:authentication-provider>
 			<security:user-service>
 				<security:user name="user" password="pass" authorities="ROLE_USER"/>
+				<security:user name="admin" password="pass" authorities="ROLE_USER, ROLE_FOO"/>
 			</security:user-service>
 		</security:authentication-provider>	
 	</security:authentication-manager>
 
 	<!-- for user authorization -->
 	<security:http auto-config="true" use-expressions="false">
-		<security:intercept-url pattern="/**" access="ROLE_USER"/>
+		<!-- Order matters here as first match get served first -->
+		<security:intercept-url pattern="/appointments/*" access="ROLE_USER"/>
+		<security:intercept-url pattern="/schedule/*" access="ROLE_FOO"/>
+		<security:intercept-url pattern="/**" access="ROLE_ANONYMOUS"/> <!-- ROLE_ANONYMOUS is reserved name for anonymous access -->
 	</security:http>
 	
 </beans>

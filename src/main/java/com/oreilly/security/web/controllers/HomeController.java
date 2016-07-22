@@ -22,4 +22,9 @@ public class HomeController {
 	public String goLogin(){
 		return "login";
 	}
+	
+	@RequestMapping("/schedule")
+	public String goSchedule(){
+		return "schedule";
+	}	
 }
