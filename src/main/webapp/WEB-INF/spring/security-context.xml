@@ -5,6 +5,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<!-- It isolates Spring Security's requirements for evaluating web-security expressions from implementation of underlying expression objects -->
+	<bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+
 	<!-- for user authentication -->
 	<security:authentication-manager>
 		<security:authentication-provider>
@@ -24,7 +27,7 @@
 		<!-- username/password params must match with ones in login.jsp -->
 		<security:form-login login-page="/login" login-processing-url="/login" 
 			username-parameter="custom_username" password-parameter="custom_password" 
-			default-target-url="/appointment/"
+			default-target-url="/appointments/"
 			always-use-default-target="true"
 			authentication-failure-url="/login?error=true"
 			/>
@@ -32,7 +35,7 @@
 		<!-- Order matters here as first match get served first -->
 		<security:intercept-url pattern="/appointments/*" access="ROLE_USER"/>
 		<security:intercept-url pattern="/schedule/*" access="ROLE_FOO"/>
-		<security:intercept-url pattern="/**" access="ROLE_ANONYMOUS"/> <!-- ROLE_ANONYMOUS is reserved name for anonymous access -->
+		<security:intercept-url pattern="/**" access="ROLE_ANONYMOUS, ROLE_USER"/> <!-- ROLE_ANONYMOUS is reserved name for anonymous access -->
 	</security:http>
 	
 </beans>
