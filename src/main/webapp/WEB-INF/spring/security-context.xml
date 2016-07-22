@@ -17,6 +17,13 @@
 
 	<!-- for user authorization -->
 	<security:http auto-config="true" use-expressions="false">
+		<!-- Instead of SS auto generated login form, it uses browser supported login page -->
+		<!-- <security:http-basic/> -->
+		
+		<!-- Enable our own custom login page -->
+		<security:form-login login-page="/login" login-processing-url="/login" 
+			username-parameter="custom_username" password-parameter="custom_password"/> <!-- those params match with in login.jsp -->
+		
 		<!-- Order matters here as first match get served first -->
 		<security:intercept-url pattern="/appointments/*" access="ROLE_USER"/>
 		<security:intercept-url pattern="/schedule/*" access="ROLE_FOO"/>
