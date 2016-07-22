@@ -44,6 +44,9 @@
 			</div>
 			<!-- mandatory to enable protection against CSRF attack -->
 			<sec:csrfInput/> 
+			<c:if test="${param.error != null}">
+				<p>Invalid username or password</p>
+			</c:if>
 			<button type="submit" id="btn-save" class="btn btn-primary">Login</button>
 		</form>
 	</div>

@@ -21,9 +21,14 @@
 		<!-- <security:http-basic/> -->
 		
 		<!-- Enable our own custom login page -->
+		<!-- username/password params must match with ones in login.jsp -->
 		<security:form-login login-page="/login" login-processing-url="/login" 
-			username-parameter="custom_username" password-parameter="custom_password"/> <!-- those params match with in login.jsp -->
-		
+			username-parameter="custom_username" password-parameter="custom_password" 
+			default-target-url="/appointment/"
+			always-use-default-target="true"
+			authentication-failure-url="/login?error=true"
+			/>
+
 		<!-- Order matters here as first match get served first -->
 		<security:intercept-url pattern="/appointments/*" access="ROLE_USER"/>
 		<security:intercept-url pattern="/schedule/*" access="ROLE_FOO"/>
