@@ -18,8 +18,11 @@
 							<p class="navbar-text">						
 								Welcome
 								<sec:authentication property="name" />
-								<a href="<c:url value="/logout" />">Logout</a>
+								<a id="logout" href="#">Logout</a>
 							</p>
+							<form id="logout-form" action="<c:url value="/logout" />" method="post">
+								<sec:csrfInput/>
+							</form>
 						</li>
 					</c:when>
 					<c:otherwise>

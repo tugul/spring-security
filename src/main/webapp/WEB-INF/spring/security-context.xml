@@ -31,6 +31,8 @@
 			always-use-default-target="true"
 			authentication-failure-url="/login?error=true"
 			/>
+			
+		<security:logout logout-url="/logout" logout-success-url="/login?logout=true"/>
 
 		<!-- Order matters here as first match get served first -->
 		<security:intercept-url pattern="/appointments/*" access="ROLE_USER"/>

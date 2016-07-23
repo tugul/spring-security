@@ -43,7 +43,12 @@
 				<input type="password" name="custom_password" class="form-control" />
 			</div>
 			<!-- mandatory to enable protection against CSRF attack -->
-			<sec:csrfInput/> 
+			<sec:csrfInput/>
+
+			<c:if test="${param.logout != null}">
+				<p>You have successfully been logged out.</p>
+			</c:if>			 
+
 			<c:if test="${param.error != null}">
 				<p>Invalid username or password</p>
 			</c:if>
